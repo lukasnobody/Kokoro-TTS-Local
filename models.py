@@ -16,14 +16,19 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 # Patch KPipeline's load_voice method to use weights_only=False
 original_load_voice = KPipeline.load_voice
 
-def patched_load_voice(self, voice_path):
+
+def patched_load_voice(self, voice_name):
+    voice_path = f"voices/{voice_name}.pt"
+
     """Load voice model with weights_only=False for compatibility"""
     if not os.path.exists(voice_path):
         raise FileNotFoundError(f"Voice file not found: {voice_path}")
     voice_name = Path(voice_path).stem
     self.voices[voice_name] = torch.load(voice_path, weights_only=False).to(self.device)
 
+
 KPipeline.load_voice = patched_load_voice
+
 
 def patch_json_load():
     """Patch json.load to handle UTF-8 encoded files with special characters"""

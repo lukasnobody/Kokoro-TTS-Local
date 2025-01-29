@@ -90,7 +90,7 @@ def generate_tts_with_logs(voice_name, text, format):
         print(f"\nGenerating speech for: '{text}'")
         print(f"Using voice: {voice_name}")
         
-        generator = model(text, voice=f"voices/{voice_name}.pt", speed=1.0, split_pattern=r'\n+')
+        generator = model(text, voice=voice_name, speed=1.0, split_pattern=r'\n+')
         
         all_audio = []
         for gs, ps, audio in generator:

@@ -1,4 +1,4 @@
-kokoro  # Official Kokoro TTS library
+kokoro==0.2.1 # Official Kokoro TTS library
 misaki  # G2P library for Kokoro
 torch  # PyTorch for model inference
 soundfile  # Audio file handling
